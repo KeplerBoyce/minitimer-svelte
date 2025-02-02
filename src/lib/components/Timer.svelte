@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { scramble, sessions, chosenSession } from "$lib/state";
+
   let {
     genScramble, // Scramble generator callback
   }: {
@@ -12,6 +14,7 @@
 
   let startTime = $state(0); // Start time (unix timestamp)
   let currTime = $state(0); // Current time (unix timestamp)
+  let stopTime = $state(0); // Stop time (unix timestamp)
 
   let timeoutId = $state(0); // ID for spacebar holding timeout
 
@@ -22,12 +25,19 @@
     if (running) {
       running = false;
       stopped = true;
+      holding = true;
+      stopTime = Date.now();
+      $sessions[$chosenSession].solves.push({
+        scramble: $scramble,
+        time: stopTime - startTime,
+        timeMod: "None",
+      });
+      $sessions = $sessions;
       genScramble();
+      return;
     }
     if (e.key === ' ') {
-      if (!running) {
-        holding = true;
-      }
+      holding = true;
     }
   }
 
@@ -40,7 +50,7 @@
 
   // Set timer as ready when spacebar is held long enough
   $effect(() => {
-    if (holding) {
+    if (holding && !stopped) {
       const originalId = window.setTimeout(() => {
         // Prevents issue of releasing and re-holding "bypassing" hold timer
         if (holding && timeoutId === originalId) {
@@ -76,7 +86,7 @@
 
 <div class="grow flex justify-center items-center">
   <p class={`text-7xl font-mono transition ${holding ? ready ? "text-green-500" : "text-red-500" : ""}`}>
-    {((currTime - startTime) / 1000).toFixed(2)}
+    {(((running ? currTime : stopTime) - startTime) / 1000).toFixed(2)}
   </p>
 </div>
 

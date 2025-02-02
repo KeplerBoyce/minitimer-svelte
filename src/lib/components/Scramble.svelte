@@ -1,11 +1,7 @@
 <script lang="ts">
-  let {
-    scramble, // Scramble text
-  }: {
-    scramble: string,
-  } = $props();
+  import { scramble } from "$lib/state";
 </script>
 
 <p class="text-2xl">
-  {scramble}
+  {$scramble}
 </p>

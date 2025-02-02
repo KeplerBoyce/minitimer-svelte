@@ -7,7 +7,7 @@
 
 <div class="flex flex-col w-screen h-screen">
   <Header />
-  <div class="grow w-full overflow-y-scroll p-4">
+  <div class="grow w-full overflow-y-scroll">
     {@render children()}
   </div>
 </div>
