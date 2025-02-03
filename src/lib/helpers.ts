@@ -49,7 +49,7 @@ export const msToString = (ms: number) => {
 
 export const avgOfN = (solves: Solve[], index: number, n: number) => {
   if (solves.length - index >= n) {
-    return solves.slice(index, index + n).map(a => a.time).reduce((a, b) => a + b);
+    return Math.floor(solves.slice(index, index + n).map(a => a.time).reduce((a, b) => a + b) / n);
   }
   return undefined;
 }
