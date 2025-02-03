@@ -3,17 +3,15 @@
 
   let {
     content,
-    defaultOn, // True = begins as on
+    on = false,
     canDeselect, // True = allows us to click again to deselect
     callback,
   }: {
     content: Snippet<[boolean]>,
-    defaultOn?: boolean,
+    on: boolean,
     canDeselect?: boolean,
     callback: () => void,
   } = $props();
-
-  let on = $state(defaultOn);
 
   // Call callback if we just turned the button on, only deselect if it is allowed
   const toggle = () => {
@@ -24,16 +22,12 @@
       on = false;
     }
   }
-
-  // To allow some other component to deselect this button automatically
-  export const clear = () => {
-    on = false;
-  }
 </script>
 
 <button
   class="rounded-lg overflow-hidden border border-black"
   onclick={toggle}
+  onkeydown={(e) => {e.preventDefault()}}
 >
   {@render content(on)}
 </button>

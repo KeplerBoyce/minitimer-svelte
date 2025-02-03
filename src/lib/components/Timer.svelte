@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { scramble, sessions, chosenSession } from "$lib/state";
+  import { scramble, sessions, chosenSession, timerOption } from "$lib/state";
 
   let {
     genScramble, // Scramble generator callback
@@ -26,6 +26,9 @@
       running = false;
       stopped = true;
       holding = true;
+      // Reset selected timer option to "none"
+      $timerOption = 0;
+      // Add solve to session
       stopTime = Date.now();
       $sessions[$chosenSession].solves.push({
         scramble: $scramble,

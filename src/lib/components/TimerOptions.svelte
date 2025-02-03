@@ -1,16 +1,17 @@
 <script lang="ts">
   import type { SvelteComponent } from "svelte";
   import ToggleButton from "./general/ToggleButton.svelte";
+  import { timerOption } from "$lib/state";
 
+  // Bindings for the toggle buttons to allow each one to deselect the others on click
   let noneBinding: SvelteComponent;
   let plus2Binding: SvelteComponent;
   let dnfBinding: SvelteComponent;
 </script>
 
 <div class="flex gap-2">
-  <ToggleButton bind:this={noneBinding} defaultOn callback={() => {
-    plus2Binding.clear();
-    dnfBinding.clear();
+  <ToggleButton bind:this={noneBinding} on={$timerOption === 0} callback={() => {
+    $timerOption = 0;
   }}>
     {#snippet content(on)}
       <p class={`px-2 py-1 transition ${on ? "bg-purple-300" : "bg-slate-100"}`}>
@@ -19,9 +20,8 @@
     {/snippet}
   </ToggleButton>
 
-  <ToggleButton bind:this={plus2Binding} callback={() => {
-    noneBinding.clear();
-    dnfBinding.clear();
+  <ToggleButton bind:this={plus2Binding} on={$timerOption === 1} callback={() => {
+    $timerOption = 1;
   }}>
     {#snippet content(on)}
       <p class={`px-2 py-1 transition ${on ? "bg-purple-300" : "bg-slate-100"}`}>
@@ -30,9 +30,8 @@
     {/snippet}
   </ToggleButton>
 
-  <ToggleButton bind:this={dnfBinding} callback={() => {
-    noneBinding.clear();
-    plus2Binding.clear();
+  <ToggleButton bind:this={dnfBinding} on={$timerOption === 2} callback={() => {
+    $timerOption = 2;
   }}>
     {#snippet content(on)}
       <p class={`px-2 py-1 transition ${on ? "bg-purple-300" : "bg-slate-100"}`}>
