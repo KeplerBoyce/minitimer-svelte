@@ -27,7 +27,9 @@
       {msToString(solve.time)}
     </p>
     {#if solve.timeMod === "+2"}
-      Test
+      +2
+    {:else if solve.timeMod === "DNF"}
+      DNF
     {/if}
   </div>
 </button>
