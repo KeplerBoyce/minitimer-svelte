@@ -30,12 +30,11 @@
       $timerOption = 0;
       // Add solve to session
       stopTime = Date.now();
-      $sessions[$chosenSession].solves.push({
+      $sessions[$chosenSession].solves = [{
         scramble: $scramble,
         time: stopTime - startTime,
         timeMod: "None",
-      });
-      $sessions = $sessions;
+      }, ...$sessions[$chosenSession].solves];
       genScramble();
       return;
     }

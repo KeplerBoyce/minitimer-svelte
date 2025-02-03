@@ -19,12 +19,15 @@
 </script>
 
 <button>
-  <div class="w-full flex gap-4 justify-end border rounded-lg px-2 hover:bg-slate-100 font-mono text-right text-lg">
+  <div class="w-full flex gap-4 justify-end px-2 hover:bg-slate-100 font-mono text-right text-lg">
     <p class="min-w-16">
       {ao5 ? msToString(ao5) : "-"}
     </p>
     <p class="min-w-16">
       {msToString(solve.time)}
     </p>
+    {#if solve.timeMod === "+2"}
+      Test
+    {/if}
   </div>
 </button>
