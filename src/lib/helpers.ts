@@ -1,3 +1,6 @@
+import type { Solve } from "./types";
+
+
 export const msToString = (ms: number) => {
   const hours = Math.floor(ms / 3600000);
   const mins = Math.floor((ms % 3600000) / 60000);
@@ -42,4 +45,19 @@ export const msToString = (ms: number) => {
     str += `0${hundredths}`;
   }
   return str;
+}
+
+export const avgOfN = (solves: Solve[], index: number, n: number) => {
+  if (solves.length - index >= n) {
+    return solves.slice(index, index + n).map(a => a.time).reduce((a, b) => a + b);
+  }
+  return undefined;
+}
+
+export const getAvgInfo = (solves: Solve[], index: number) => {
+  return {
+    ao5: avgOfN(solves, index, 5),
+    ao12: avgOfN(solves, index, 12),
+    ao100: avgOfN(solves, index, 100),
+  };
 }

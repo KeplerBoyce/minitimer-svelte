@@ -42,7 +42,10 @@
   }
 
   const onKeyUp = (e: KeyboardEvent) => {
-    stopped = false;
+    if (stopped) {
+      stopped = false;
+      holding = false;
+    }
     if (e.key === ' ') {
       holding = false;
     }
