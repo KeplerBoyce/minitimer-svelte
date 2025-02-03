@@ -2,6 +2,7 @@
   import Scramble from "$lib/components/Scramble.svelte";
   import Sidebar from "$lib/components/Sidebar.svelte";
   import Timer from "$lib/components/Timer.svelte";
+  import TimerOptions from "$lib/components/TimerOptions.svelte";
   import { sg } from "$lib/consts";
   import { scramble } from "$lib/state";
 
@@ -14,6 +15,9 @@
   <Sidebar />
   <div class="grow h-full flex flex-col justify-center items-center">
     <Scramble />
-    <Timer genScramble={gen3x3} />
+    <div class="grow flex flex-col justify-center items-center">
+      <Timer genScramble={gen3x3} />
+      <TimerOptions />
+    </div>
   </div>
 </div>

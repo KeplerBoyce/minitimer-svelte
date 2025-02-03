@@ -87,11 +87,9 @@
   });
 </script>
 
-<div class="grow flex justify-center items-center">
-  <p class={`text-7xl font-mono transition ${holding ? ready ? "text-green-500" : "text-red-500" : ""}`}>
-    {(((running ? currTime : stopTime) - startTime) / 1000).toFixed(2)}
-  </p>
-</div>
+<p class={`text-7xl font-mono transition ${holding ? ready ? "text-green-500" : "text-red-500" : ""}`}>
+  {(((running ? currTime : stopTime) - startTime) / 1000).toFixed(2)}
+</p>
 
 <svelte:window
   on:keydown={onKeyDown}

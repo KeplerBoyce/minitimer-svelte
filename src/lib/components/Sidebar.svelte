@@ -8,7 +8,7 @@
   }
 </script>
 
-<div class="w-min h-full rounded-xl border shadow-xl p-4">
+<div class="w-min h-full rounded-xl border border-black shadow-xl p-4">
   <h2 class="font-bold text-center text-xl mb-2">
     Solves
   </h2>
