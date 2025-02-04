@@ -48,10 +48,14 @@ export const msToString = (ms: number) => {
 }
 
 export const avgOfN = (solves: Solve[], index: number, n: number) => {
-  if (index + n <= solves.length) {
-    return Math.floor(solves.slice(index, index + n).map(a => a.time).reduce((a, b) => a + b) / n);
+  if (index + n > solves.length) {
+    return undefined;
   }
-  return undefined;
+  return Math.floor(solves
+    .slice(index, index + n)
+    .map(a => a.time + (a.timeMod === "+2" ? 2000 : 0))
+    .reduce((a, b) => a + b)
+    / n);
 }
 
 export const getAvgInfo = (solves: Solve[], index: number) => {
@@ -60,4 +64,17 @@ export const getAvgInfo = (solves: Solve[], index: number) => {
     ao12: avgOfN(solves, index, 12),
     ao100: avgOfN(solves, index, 100),
   };
+}
+
+export const getPbAvgsOfN = (solves: Solve[], n: number) => {
+  let pbs = Array(solves.length).fill(false);
+  let bestSoFar = Infinity;
+  for (let i = solves.length - n; i >= 0; i--) {
+    const aoN = avgOfN(solves, i, n);
+    if (aoN && aoN < bestSoFar) {
+      pbs[i] = true;
+      bestSoFar = aoN;
+    }
+  }
+  return pbs;
 }

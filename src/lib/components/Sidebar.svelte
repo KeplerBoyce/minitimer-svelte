@@ -12,18 +12,18 @@
   <h2 class="font-bold text-center text-xl mb-2">
     Solves
   </h2>
-  <div class="border border-black rounded-lg overflow-hidden">
-    <div class="px-2 flex gap-4 font-bold text-right border-b border-black">
-      <h3 class="min-w-16">
+  <div class="border border-black rounded-lg">
+    <div class="flex font-bold text-right border-b border-black">
+      <h3 class="min-w-20 mr-4">
         Ao5
       </h3>
-      <h3 class="min-w-16">
+      <h3 class="min-w-20 mr-1">
         Time
       </h3>
     </div>
     <div class="w-full flex flex-col">
       {#each $sessions[$chosenSession].solves as solve, i}
-        <ListSolve solve={solve} info={getInfo(i)} />
+        <ListSolve solve={solve} index={i} info={getInfo(i)} />
       {/each}
     </div>
   </div>
