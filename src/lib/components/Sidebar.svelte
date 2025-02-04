@@ -22,9 +22,15 @@
       </h3>
     </div>
     <div class="w-full flex flex-col">
-      {#each $sessions[$chosenSession].solves as solve, i}
-        <ListSolve solve={solve} index={i} info={getInfo(i)} />
-      {/each}
+      {#if $sessions[$chosenSession].solves.length > 0}
+        {#each $sessions[$chosenSession].solves as solve, i}
+          <ListSolve solve={solve} index={i} info={getInfo(i)} />
+        {/each}
+      {:else}
+        <p class="text-center italic">
+          No solves yet!
+        </p>
+      {/if}
     </div>
   </div>
 </div>

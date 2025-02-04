@@ -2,10 +2,10 @@
   import type { Snippet } from "svelte";
 
   let {
-    icon,
+    button,
     popover,
   }: {
-    icon: Snippet,
+    button: Snippet,
     popover: Snippet,
   } = $props();
 
@@ -28,7 +28,7 @@
       }
     }}
   >
-    {@render icon()}
+    {@render button()}
   </div>
   {#if open || locked}
     {@render popover()}

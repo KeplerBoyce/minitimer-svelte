@@ -30,7 +30,7 @@
 </script>
 
 <HoverPopover>
-  {#snippet icon()}
+  {#snippet button()}
     <div class="w-6 h-6 rounded-full border border-black flex justify-center items-center">
       <MdiStarOutline style="color: #0ea5e9" />
     </div>

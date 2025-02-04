@@ -12,7 +12,7 @@
 </script>
 
 <HoverPopover>
-  {#snippet icon()}
+  {#snippet button()}
     <div class="w-6 h-6 rounded-full border border-black flex justify-center items-center">
       <MaterialSymbolsFlagOutline style="color: #ef4444" />
     </div>
