@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { msToString, avgOfN } from "$lib/helpers";
+  import { msToString, avgOfN, getAdjustedTime } from "$lib/helpers";
   import { sessions, chosenSession, session, pbSingles, pbAo5s } from "$lib/state";
   import Popover from "./general/Popover.svelte";
   import DeductionPopover from "./DeductionPopover.svelte";
@@ -16,7 +16,6 @@
   let popoverHovered = $state(false); // True when this solve's info popover is hovered
   let popoverOpen = $state(false); // True when this solve's info popover is open
 
-  let solve = $derived($session.solves[index]); // Solve object
   let ao5 = $derived(avgOfN($session.solves, index, 5)); // ao5 (ms)
   let isPbSingle = $derived($pbSingles[index]); // True if this is a PB single
   let isPbAo5 = $derived($pbAo5s[index]); // True if this is a PB Ao5
@@ -57,7 +56,7 @@
         {ao5 ? msToString(ao5) : "-"}
       </p>
       <p class={`min-w-20 mr-1 ${isPbSingle ? "text-sky-500" : ""}`}>
-        {solve.timeMod === "DNF" ? "DNF" : msToString(solve.time + (solve.timeMod === "+2" ? 2000 : 0))}
+        {$session.solves[index].timeMod === "DNF" ? "DNF" : msToString(getAdjustedTime($session.solves[index]))}
       </p>
     </div>
     <div class="relative">
@@ -65,8 +64,8 @@
         {#if pbs.length > 0}
           <PbPopover pbs={pbs} />
         {/if}
-        {#if solve.timeMod !== "None"}
-          <DeductionPopover solve={solve} />
+        {#if $session.solves[index].timeMod !== "None"}
+          <DeductionPopover solve={$session.solves[index]} />
         {/if}
       </div>
     </div>

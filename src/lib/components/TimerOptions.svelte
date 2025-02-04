@@ -16,7 +16,7 @@
   <div class="flex gap-2">
     <ToggleButton bind:this={noneBinding} on={$timerOption === 0} callback={() => {
       $timerOption = 0;
-      if ($session.solves[0]) {
+      if ($session.solves.length > 0) {
         $sessions[$chosenSession].solves[0].timeMod = "None";
         $sessions = $sessions;
       }
@@ -30,7 +30,7 @@
 
     <ToggleButton bind:this={plus2Binding} on={$timerOption === 1} callback={() => {
       $timerOption = 1;
-      if ($session.solves[0]) {
+      if ($session.solves.length > 0) {
         $sessions[$chosenSession].solves[0].timeMod = "+2";
         $sessions = $sessions;
       }
@@ -44,7 +44,7 @@
 
     <ToggleButton bind:this={dnfBinding} on={$timerOption === 2} callback={() => {
       $timerOption = 2;
-      if ($session.solves[0]) {
+      if ($session.solves.length > 0) {
         $sessions[$chosenSession].solves[0].timeMod = "DNF";
         $sessions = $sessions;
       }
