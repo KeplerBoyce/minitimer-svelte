@@ -43,6 +43,10 @@ timerOption.subscribe((value: number) => {
 });
 
 /* ----- Derived stores ----- */
+export let session = derived([sessions, chosenSession], ([$sessions, $chosenSession]) => {
+  return $sessions[$chosenSession];
+});
+
 export let pbSingles = derived([sessions, chosenSession], ([$sessions, $chosenSession]) => {
   return getPbAvgsOfN($sessions[$chosenSession].solves, 1);
 });

@@ -16,3 +16,13 @@ export type CubeType = "2x2" | "3x3" | "4x4" | "5x5" | "6x6" | "7x7"
 
 // Time modifier for tracking +2s and DNFs
 export type TimeMod = "None" | "+2" | "DNF";
+
+// Types for a list of times when printing average of N solves
+export type AoNTime = {
+  time: string,
+  outlier: boolean,
+}
+export type AoN = {
+  average: string,
+  times: AoNTime[],
+};

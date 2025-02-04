@@ -1,9 +1,10 @@
 <script lang="ts">
   import { msToString, avgOfN } from "$lib/helpers";
-  import { sessions, chosenSession, pbSingles, pbAo5s } from "$lib/state";
+  import { sessions, chosenSession, session, pbSingles, pbAo5s } from "$lib/state";
   import Popover from "./general/Popover.svelte";
   import DeductionPopover from "./DeductionPopover.svelte";
   import PbPopover from "./PbPopover.svelte";
+  import SolveOptions from "./SolveOptions.svelte";
 
   let {
     index, // Index inside solves array of chosen session
@@ -11,13 +12,16 @@
     index: number,
   } = $props();
 
-  let popoverOpen = $state(false);
+  let solveHovered = $state(false); // True when this ListSolve is hovered
+  let popoverHovered = $state(false); // True when this solve's info popover is hovered
+  let popoverOpen = $state(false); // True when this solve's info popover is open
 
-  let solve = $derived($sessions[$chosenSession].solves[index]);
-  let ao5 = $derived(avgOfN($sessions[$chosenSession].solves, index, 5));
-  let isPbSingle = $derived($pbSingles[index]);
-  let isPbAo5 = $derived($pbAo5s[index]);
+  let solve = $derived($session.solves[index]); // Solve object
+  let ao5 = $derived(avgOfN($session.solves, index, 5)); // ao5 (ms)
+  let isPbSingle = $derived($pbSingles[index]); // True if this is a PB single
+  let isPbAo5 = $derived($pbAo5s[index]); // True if this is a PB Ao5
 
+  // Used for setting pbs derived state
   const getPbs = () => {
     const pbs = [];
     if (isPbSingle) pbs.push(1);
@@ -25,21 +29,27 @@
     return pbs;
   }
 
-  let pbs = $derived(getPbs());
+  let pbs = $derived(getPbs()); // Array of values of N for which this is a PB AoN
 
   const deleteSolve = () => {
     popoverOpen = false;
     $sessions[$chosenSession].solves.splice(index, 1);
-    $sessions = $sessions
+    $sessions = $sessions;
   }
 </script>
 
+<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 <div class="flex">
   <button
     class="flex items-center"
     onclick={() => {
       popoverOpen = !popoverOpen;
-      console.log(popoverOpen)
+    }}
+    onmouseover={() => {
+      solveHovered = true;
+    }}
+    onmouseout={() => {
+      solveHovered = false;
     }}
   >
     <div class={`w-full flex justify-end hover:bg-slate-100 ${popoverOpen ? "bg-slate-100" : ""} font-mono text-right text-lg rounded-lg`}>
@@ -62,13 +72,30 @@
     </div>
   </button>
   <Popover open={popoverOpen}>
-    <div class="absolute -top-2 left-1 bg-white p-2 rounded-lg border border-black">
-      <button
-        class="whitespace-nowrap bg-red-500 text-white font-bold text-sm px-2 py-1 rounded-lg"
-        onclick={deleteSolve}
-      >
-        Delete
-      </button>
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <div
+      class="absolute -top-2 left-1 min-w-96 bg-white p-2 pt-1 z-[60] rounded-lg border border-black"
+      onmouseover={() => {
+        solveHovered = true;
+      }}
+      onmouseout={() => {
+        solveHovered = false;
+      }}
+    >
+      <SolveOptions
+        index={index}
+        isPbSingle={isPbSingle}
+        isPbAo5={isPbAo5}
+        deleteSolve={deleteSolve}
+      />
     </div>
   </Popover>
 </div>
+
+<svelte:window
+  on:click={() => {
+    if (!solveHovered && !popoverHovered) {
+      popoverOpen = false;
+    }
+  }}
+/>

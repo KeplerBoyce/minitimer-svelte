@@ -47,13 +47,35 @@ export const msToString = (ms: number) => {
   return str;
 }
 
+export const getAdjustedTime = (solve: Solve) => {
+  return solve.time + (solve.timeMod ? 2000 : 0);
+}
+
+const removeOutliers = (times: number[]) => {
+  const n = times.length;
+  if (n <= 3) {
+    return times;
+  } else if (n <= 20) {
+    return times.sort().slice(1, n);
+  }
+  const numOutliers = Math.floor(n / 20);
+  return times.sort().slice(numOutliers, n - numOutliers + 1);
+}
+
+export const getNSolves = (solves: Solve[], index: number, n: number) => {
+  if (index + n > solves.length) {
+    return undefined;
+  }
+  return solves.slice(index, index + n);
+}
+
 export const avgOfN = (solves: Solve[], index: number, n: number) => {
   if (index + n > solves.length) {
     return undefined;
   }
-  return Math.floor(solves
+  return Math.floor(removeOutliers(solves
     .slice(index, index + n)
-    .map(a => a.time + (a.timeMod === "+2" ? 2000 : 0))
+    .map(a => a.time + (a.timeMod === "+2" ? 2000 : 0)))
     .reduce((a, b) => a + b)
     / n);
 }
