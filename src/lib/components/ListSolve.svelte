@@ -25,6 +25,8 @@
     return pbs;
   }
 
+  let pbs = $derived(getPbs());
+
   const deleteSolve = () => {
     popoverOpen = false;
     $sessions[$chosenSession].solves.splice(index, 1);
@@ -41,17 +43,17 @@
     }}
   >
     <div class={`w-full flex justify-end hover:bg-slate-100 ${popoverOpen ? "bg-slate-100" : ""} font-mono text-right text-lg rounded-lg`}>
-      <p class="min-w-20 mr-4">
+      <p class={`min-w-20 mr-4 ${isPbAo5 ? "text-sky-500" : ""}`}>
         {ao5 ? msToString(ao5) : "-"}
       </p>
-      <p class="min-w-20 mr-1">
+      <p class={`min-w-20 mr-1 ${isPbSingle ? "text-sky-500" : ""}`}>
         {solve.timeMod === "DNF" ? "DNF" : msToString(solve.time + (solve.timeMod === "+2" ? 2000 : 0))}
       </p>
     </div>
     <div class="relative">
       <div class="absolute -top-3 left-3 flex gap-1">
-        {#if isPbAo5}
-          <PbPopover pbs={getPbs()} />
+        {#if pbs.length > 0}
+          <PbPopover pbs={pbs} />
         {/if}
         {#if solve.timeMod !== "None"}
           <DeductionPopover solve={solve} />
