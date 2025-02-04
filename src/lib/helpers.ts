@@ -48,18 +48,22 @@ export const msToString = (ms: number) => {
 }
 
 export const getAdjustedTime = (solve: Solve) => {
-  return solve.time + (solve.timeMod ? 2000 : 0);
+  return solve.time + (solve.timeMod === "+2" ? 2000 : 0);
 }
 
 const removeOutliers = (times: number[]) => {
   const n = times.length;
+  const numOutliers = getNumOutliers(n);
+  return times.sort().slice(numOutliers, n - 2 * numOutliers + 1);
+}
+
+const getNumOutliers = (n: number) => {
   if (n <= 3) {
-    return times;
+    return 0;
   } else if (n <= 20) {
-    return times.sort().slice(1, n);
+    return 1;
   }
-  const numOutliers = Math.floor(n / 20);
-  return times.sort().slice(numOutliers, n - numOutliers + 1);
+  return Math.floor(n / 20);
 }
 
 export const getNSolves = (solves: Solve[], index: number, n: number) => {
@@ -77,7 +81,7 @@ export const avgOfN = (solves: Solve[], index: number, n: number) => {
     .slice(index, index + n)
     .map(a => a.time + (a.timeMod === "+2" ? 2000 : 0)))
     .reduce((a, b) => a + b)
-    / n);
+    / (n - 2 * getNumOutliers(n)));
 }
 
 export const getAvgInfo = (solves: Solve[], index: number) => {
