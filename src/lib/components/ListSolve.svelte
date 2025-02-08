@@ -18,10 +18,10 @@
   <button
     class="flex items-center"
     onclick={() => {
-      if (popoverIndex !== index) {
-        $popoverIndex = index;
-      } else {
+      if ($popoverIndex === index) {
         $popoverIndex = undefined;
+      } else {
+        $popoverIndex = index;
       }
     }}
     onmouseover={() => {

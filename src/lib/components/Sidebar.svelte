@@ -43,7 +43,7 @@
     <div class="relative">
       <Popover open={$popoverIndex !== undefined}>
         <!-- svelte-ignore a11y_no_static_element_interactions -->
-        <div class="absolute top-0 left-4 min-w-96 bg-white p-2 pt-1 z-[60] rounded-lg border border-black">
+        <div class="absolute top-0 left-4 min-w-96 bg-white p-2 pt-1 z-[60] rounded-lg border border-black shadow-lg">
           <SolveOptions
             index={$popoverIndex}
             isPbSingle={$pbSingles[$popoverIndex]}
