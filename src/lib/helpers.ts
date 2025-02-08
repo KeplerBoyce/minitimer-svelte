@@ -109,3 +109,23 @@ export const getPbAvgsOfN = (solves: Solve[], n: number) => {
   }
   return pbs;
 }
+
+export const getPbAvgOfNSolves = (solves: Solve[], n: number) => {
+  let bestSoFar = Infinity;
+  let startIndex = undefined;
+  for (let i = solves.length - n; i >= 0; i--) {
+    const aoN = avgOfN(solves, i, n);
+    if (aoN && aoN < bestSoFar) {
+      bestSoFar = aoN;
+      startIndex = solves.length - i;
+    }
+  }
+  if (startIndex === undefined) {
+    return undefined;
+  }
+  return {
+    time: bestSoFar,
+    timeStr: msToString(bestSoFar),
+    index: startIndex,
+  };
+}
