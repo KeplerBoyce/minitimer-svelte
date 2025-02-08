@@ -2,6 +2,9 @@ import type { Solve } from "./types";
 
 
 export const msToString = (ms: number) => {
+  if (ms === Infinity) {
+    return "DNF";
+  }
   const hours = Math.floor(ms / 3600000);
   const mins = Math.floor((ms % 3600000) / 60000);
   const secs = Math.floor((ms % 60000) / 1000);
@@ -48,7 +51,9 @@ export const msToString = (ms: number) => {
 }
 
 export const getAdjustedTime = (solve: Solve) => {
-  return solve.time + (solve.timeMod === "+2" ? 2000 : 0);
+  if (solve.timeMod === "DNF") return Infinity;
+  else if (solve.timeMod === "+2") return solve.time + 2000;
+  return solve.time;
 }
 
 const removeOutliers = (times: number[]) => {
@@ -79,7 +84,7 @@ export const avgOfN = (solves: Solve[], index: number, n: number) => {
   }
   return Math.floor(removeOutliers(solves
     .slice(index, index + n)
-    .map(a => a.time + (a.timeMod === "+2" ? 2000 : 0)))
+    .map(a => getAdjustedTime(a)))
     .reduce((a, b) => a + b)
     / (n - 2 * getNumOutliers(n)));
 }

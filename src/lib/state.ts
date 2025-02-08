@@ -42,6 +42,10 @@ timerOption.subscribe((value: number) => {
   localStorage.timerOption = JSON.stringify(value);
 });
 
+// Index of selected solve, undefined if no solve is selected
+export let popoverIndex = writable<number | undefined>(undefined);
+export let hoveredIndex = writable<number | undefined>(undefined);
+
 /* ----- Derived stores ----- */
 export let session = derived([sessions, chosenSession], ([$sessions, $chosenSession]) => {
   return $sessions[$chosenSession];
