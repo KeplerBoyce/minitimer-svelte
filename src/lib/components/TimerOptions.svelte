@@ -22,7 +22,7 @@
       }
     }}>
       {#snippet content(on)}
-        <p class={`px-2 py-1 transition ${on ? "bg-purple-300" : "bg-slate-100"}`}>
+        <p class={`px-2 py-1 ${on ? "bg-purple-300" : "bg-slate-100 hover:bg-purple-100"}`}>
           None
         </p>
       {/snippet}
@@ -36,7 +36,7 @@
       }
     }}>
       {#snippet content(on)}
-        <p class={`px-2 py-1 transition ${on ? "bg-purple-300" : "bg-slate-100"}`}>
+        <p class={`px-2 py-1 ${on ? "bg-purple-300" : "bg-slate-100 hover:bg-purple-100"}`}>
           +2
         </p>
       {/snippet}
@@ -50,7 +50,7 @@
       }
     }}>
       {#snippet content(on)}
-        <p class={`px-2 py-1 transition ${on ? "bg-purple-300" : "bg-slate-100"}`}>
+        <p class={`px-2 py-1 ${on ? "bg-purple-300" : "bg-slate-100 hover:bg-purple-100"}`}>
           DNF
         </p>
       {/snippet}
