@@ -109,7 +109,7 @@
   {solve.scramble}
 </p>
 {#if solve.timestamp}
-  <p class="">
+  <p class="text-sm">
     Solved on {dateToString(solve.timestamp)}
   </p>
 {/if}
