@@ -14,7 +14,7 @@
     <div class="flex flex-col bg-slate-100 border border-black rounded-lg shadow-lg overflow-hidden">
       {#each CUBE_TYPES as cubeType, i}
         <button
-          class={`px-2 py-0.5 text-left hover:bg-fuchsia-100 ${i < CUBE_TYPES.length - 1 ? "border-b border-black" : ""}`}
+          class={`px-2 py-0.5 text-left hover:bg-fuchsia-100 ${cubeType === $session.cube ? "bg-fuchsia-200" : ""} ${i < CUBE_TYPES.length - 1 ? "border-b border-black" : ""}`}
           onclick={() => {
             $sessions[$chosenSession].cube = cubeType;
             $scramble = SG.setType(CUBE_TYPE_MAP[cubeType]).get(1)[0].scramble_string;

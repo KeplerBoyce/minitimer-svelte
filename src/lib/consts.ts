@@ -6,12 +6,15 @@ var Scrambow = require('scrambow').Scrambow;
 // Scramble generator object
 export const SG = new Scrambow();
 
-// Default value for sessions list
-export const DEFAULT_SESSIONS: Session[] = [{
-  name: "test",
+// Default value for new session
+export const DEFAULT_SESSION: Session = {
+  name: "[no name]",
   cube: "3x3",
   solves: [],
-}];
+};
+
+// Default value for sessions list
+export const DEFAULT_SESSIONS: Session[] = [DEFAULT_SESSION];
 
 // Array of all cube types
 export const CUBE_TYPES: CubeType[] = [

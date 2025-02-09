@@ -1,8 +1,6 @@
 <script lang="ts">
   import { msToString, avgOfN, getAdjustedTime } from "$lib/helpers";
   import { session, pbSingles, pbAo5s, popoverIndex, hoveredIndex } from "$lib/state";
-  import DeductionPopover from "./DeductionPopover.svelte";
-  import PbPopover from "./PbPopover.svelte";
 
   let {
     index, // Index inside solves array of chosen session

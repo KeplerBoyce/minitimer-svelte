@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { session } from "$lib/state";
+  import { sessions, chosenSession, session } from "$lib/state";
   import { CUBE_TYPES } from "$lib/consts";
   import Dropdown from "./general/Dropdown.svelte";
 </script>
@@ -12,14 +12,15 @@
   {/snippet}
   {#snippet dropdownContent(close)}
     <div class="flex flex-col bg-slate-100 border border-black rounded-lg shadow-lg overflow-hidden">
-      {#each CUBE_TYPES as cubeType, i}
+      {#each $sessions as s, i}
         <button
-          class={`px-2 py-0.5 text-left hover:bg-emerald-100 ${i < CUBE_TYPES.length - 1 ? "border-b border-black" : ""}`}
+          class={`px-2 py-0.5 text-left hover:bg-emerald-100 whitespace-nowrap ${i === $chosenSession ? "bg-emerald-200" : ""} ${i < $sessions.length - 1 ? "border-b border-black" : ""}`}
           onclick={() => {
+            $chosenSession = i;
             close();
           }}
         >
-          {cubeType}
+          {s.name}
         </button>
       {/each}
     </div>

@@ -5,11 +5,15 @@
   import TimeTable from "./TimeTable.svelte";
   import SessionDropdown from "./SessionDropdown.svelte";
   import PuzzleDropdown from "./PuzzleDropdown.svelte";
+  import MaterialSymbolsSettingsOutlineRounded from "~icons/material-symbols/settings-outline-rounded";
+  import Popover from "./general/Popover.svelte";
+  import SessionOptions from "./SessionOptions.svelte";
+
+  let settingsOpen = $state(false);
 </script>
 
 <div class="flex flex-col border border-black rounded-lg px-2 py-1">
   <div class="flex gap-2 justify-center items-center">
-
     <div class="flex flex-col items-center">
       <h3 class="font-bold text-sm">
         Session
@@ -22,6 +26,29 @@
         Puzzle
       </h3>
       <PuzzleDropdown />
+    </div>
+
+    <div class="grow flex justify-end">
+      <button
+        class="w-8 h-8 flex justify-center items-center"
+        onclick={() => {
+          settingsOpen = !settingsOpen;
+        }}
+      >
+        <MaterialSymbolsSettingsOutlineRounded
+          class={`transition ${settingsOpen ? "rotate-60" : "rotate-0"}`}
+          style="font-size: 30px"
+        />
+      </button>
+      <Popover open={settingsOpen}>
+        <div class="absolute top-0 left-6 bg-white border border-black rounded-lg p-2">
+          <SessionOptions
+            close={() => {
+              settingsOpen = false;
+            }}
+          />
+        </div>
+      </Popover>
     </div>
   </div>
   <DivideY />
@@ -55,5 +82,4 @@
   <DivideY />
 
   <TimeTable />
-  <DivideY />
 </div>
