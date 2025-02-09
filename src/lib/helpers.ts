@@ -56,6 +56,30 @@ export const getAdjustedTime = (solve: Solve) => {
   return solve.time;
 }
 
+export const getGlobalMean = (solves: Solve[]) => {
+  if (solves.length === 0) {
+    return undefined;
+  }
+  return solves
+    .map(s => getAdjustedTime(s))
+    .reduce((a, b) => a + b)
+    / solves.length;
+}
+
+export const getStandardDeviation = (solves: Solve[]) => {
+  const mean = getGlobalMean(solves);
+  if (mean === undefined) {
+    return undefined;
+  }
+  return Math.sqrt(solves
+    .map(s => {
+      const deviation = getAdjustedTime(s) - mean;
+      return deviation*deviation;
+    })
+    .reduce((a, b) => a + b)
+    / solves.length);
+}
+
 const removeOutliers = (times: number[]) => {
   const n = times.length;
   const numOutliers = getNumOutliers(n);
