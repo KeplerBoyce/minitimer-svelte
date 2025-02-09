@@ -27,7 +27,7 @@
           <h3 class="min-w-20 mr-4">
             Ao5
           </h3>
-          <h3 class="min-w-20">
+          <h3 class="min-w-20 mr-1">
             Time
           </h3>
         </div>

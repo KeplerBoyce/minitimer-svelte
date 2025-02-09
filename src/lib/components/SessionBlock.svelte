@@ -10,6 +10,11 @@
   import SessionOptions from "./SessionOptions.svelte";
 
   let settingsOpen = $state(false);
+  let buttonHovered = $state(false);
+  let popoverHovered = $state(false);
+
+  let globalMean = $derived(getGlobalMean($session.solves));
+  let stdDev = $derived(getStandardDeviation($session.solves));
 </script>
 
 <div class="flex flex-col border border-black rounded-lg px-2 py-1">
@@ -29,10 +34,17 @@
     </div>
 
     <div class="grow flex justify-end">
+      <!-- svelte-ignore a11y_mouse_events_have_key_events -->
       <button
         class="w-8 h-8 flex justify-center items-center"
         onclick={() => {
           settingsOpen = !settingsOpen;
+        }}
+        onmouseover={() => {
+          buttonHovered = true;
+        }}
+        onmouseout={() => {
+          buttonHovered = false;
         }}
       >
         <MaterialSymbolsSettingsOutlineRounded
@@ -41,7 +53,16 @@
         />
       </button>
       <Popover open={settingsOpen}>
-        <div class="absolute top-0 left-6 bg-white border border-black rounded-lg p-2">
+        <!-- svelte-ignore a11y_no_static_element_interactions, a11y_mouse_events_have_key_events -->
+        <div
+          class="absolute top-0 left-6 bg-white border border-black rounded-lg p-2"
+          onmouseover={() => {
+            popoverHovered = true;
+          }}
+          onmouseout={() => {
+            popoverHovered = false;
+          }}
+        >
           <SessionOptions
             close={() => {
               settingsOpen = false;
@@ -67,7 +88,7 @@
         Global Mean
       </h4>
       <p>
-        {msToString(getGlobalMean($session.solves))}
+        {globalMean === undefined ? "N/A" : msToString(globalMean)}
       </p>
     </div>
     <div class="flex flex-col items-center">
@@ -75,7 +96,7 @@
         Std. Dev.
       </h4>
       <p>
-        {msToString(getStandardDeviation($session.solves))}
+        {stdDev === undefined ? "N/A" : msToString(stdDev)}
       </p>
     </div>
   </div>
@@ -83,3 +104,11 @@
 
   <TimeTable />
 </div>
+
+<svelte:window
+  on:click={() => {
+    if (!popoverHovered && !buttonHovered) {
+      settingsOpen = false;
+    }
+  }}
+/>

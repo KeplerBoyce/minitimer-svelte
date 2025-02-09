@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { sessions, chosenSession, session } from "$lib/state";
-  import { CUBE_TYPES } from "$lib/consts";
+  import { sessions, chosenSession, session, scramble } from "$lib/state";
+  import { CUBE_TYPES, CUBE_TYPE_MAP, SG } from "$lib/consts";
   import Dropdown from "./general/Dropdown.svelte";
 </script>
 
@@ -17,6 +17,7 @@
           class={`px-2 py-0.5 text-left hover:bg-emerald-100 whitespace-nowrap ${i === $chosenSession ? "bg-emerald-200" : ""} ${i < $sessions.length - 1 ? "border-b border-black" : ""}`}
           onclick={() => {
             $chosenSession = i;
+            $scramble = SG.setType(CUBE_TYPE_MAP[$sessions[$chosenSession].cube]).get(1)[0].scramble_string;
             close();
           }}
         >
