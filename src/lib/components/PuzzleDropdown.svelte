@@ -6,7 +6,7 @@
 
 <Dropdown>
   {#snippet buttonContent(open)}
-    <div class={`bg-slate-100 border border-black rounded-lg min-w-16 px-2 ${open ? "bg-fuchsia-200" : "hover:bg-fuchsia-100"}`}>
+    <div class={`border border-black rounded-lg min-w-16 px-2 ${open ? "bg-fuchsia-200" : "bg-slate-100 hover:bg-fuchsia-100"}`}>
       {$session.cube}
     </div>
   {/snippet}
