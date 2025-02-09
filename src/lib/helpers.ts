@@ -50,6 +50,31 @@ export const msToString = (ms: number) => {
   return str;
 }
 
+export const dateToString = (date: Date) => {
+  if (date === undefined) {
+    return "N/A";
+  }
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = d.getMonth() + 1;
+  const day = d.getDate();
+  const hours = d.getHours();
+  const minutes = d.getMinutes();
+
+  let str = `${month}/${day}/${year} at ${(hours - 1) % 12 + 1}:`;
+  if (minutes < 10) {
+    str += `0${minutes}`;
+  } else {
+    str += `${minutes}`;
+  }
+  if (hours < 12) {
+    str += "am";
+  } else {
+    str += "pm";
+  }
+  return str;
+}
+
 export const getAdjustedTime = (solve: Solve) => {
   if (solve.timeMod === "DNF") return Infinity;
   else if (solve.timeMod === "+2") return solve.time + 2000;

@@ -33,6 +33,7 @@
         scramble: $scramble,
         time: stopTime - startTime,
         timeMod: "None",
+        timestamp: stopTime,
       }, ...$sessions[$chosenSession].solves];
       genScramble();
       return;

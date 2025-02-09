@@ -8,6 +8,7 @@ export type Solve = {
   scramble: string,
   time: number, // In milliseconds
   timeMod: TimeMod,
+  timestamp: Date,
 };
 
 // Cube type for a session, determines scramble type

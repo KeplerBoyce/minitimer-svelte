@@ -1,9 +1,9 @@
 <script lang="ts">
   import { session } from "$lib/state";
-  import { msToString, getNSolves, getAdjustedTime } from "$lib/helpers";
+  import { msToString, getNSolves, getAdjustedTime, dateToString } from "$lib/helpers";
   import DivideY from "./general/DivideY.svelte";
   import type { Solve, AoN } from "$lib/types";
-    import ColoredTag from "./general/ColoredTag.svelte";
+  import ColoredTag from "./general/ColoredTag.svelte";
 
   let {
     index, // Index of this solve in current session solves array
@@ -108,6 +108,11 @@
 <p>
   {solve.scramble}
 </p>
+{#if solve.timestamp}
+  <p class="">
+    Solved on {dateToString(solve.timestamp)}
+  </p>
+{/if}
 
 <DivideY />
 
