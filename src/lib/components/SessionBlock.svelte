@@ -3,16 +3,26 @@
   import { getGlobalMean, getStandardDeviation, msToString } from "$lib/helpers";
   import DivideY from "./general/DivideY.svelte";
   import TimeTable from "./TimeTable.svelte";
+  import SessionDropdown from "./SessionDropdown.svelte";
+  import PuzzleDropdown from "./PuzzleDropdown.svelte";
 </script>
 
 <div class="flex flex-col border border-black rounded-lg px-2 py-1">
   <div class="flex gap-2 justify-center items-center">
-    <h3 class="font-bold">
-      Session:
-    </h3>
-    <button class="bg-slate-200 rounded-lg px-2 py-1">
-      {$session.name}
-    </button>
+
+    <div class="flex flex-col items-center">
+      <h3 class="font-bold text-sm">
+        Session
+      </h3>
+      <SessionDropdown />
+    </div>
+
+    <div class="flex flex-col items-center">
+      <h3 class="font-bold text-sm">
+        Puzzle
+      </h3>
+      <PuzzleDropdown />
+    </div>
   </div>
   <DivideY />
 

@@ -1,11 +1,6 @@
 <script lang="ts">
-  import { scramble, sessions, chosenSession, timerOption } from "$lib/state";
-
-  let {
-    genScramble, // Scramble generator callback
-  }: {
-    genScramble: () => void,
-  } = $props();
+  import { scramble, sessions, chosenSession, session, timerOption } from "$lib/state";
+  import { CUBE_TYPE_MAP, SG } from "$lib/consts";
 
   let running = $state(false); // True while timer is running
   let holding = $state(false); // True when spacebar is held
@@ -17,6 +12,10 @@
   let stopTime = $state(0); // Stop time (unix timestamp)
 
   let timeoutId = $state(0); // ID for spacebar holding timeout
+
+  const genScramble = () => {
+    $scramble = SG.setType(CUBE_TYPE_MAP[$session.cube]).get(1)[0].scramble_string;
+  }
 
   const onKeyDown = (e: KeyboardEvent) => {
     if (holding || stopped) {

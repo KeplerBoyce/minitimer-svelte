@@ -1,6 +1,6 @@
 import { browser } from "$app/environment";
 import { derived, writable } from "svelte/store";
-import { DEFAULT_SESSIONS, sg } from "./consts";
+import { DEFAULT_SESSIONS, SG } from "./consts";
 import { type Session } from "./types";
 import { getPbAvgsOfN } from "./helpers";
 
@@ -9,7 +9,7 @@ import { getPbAvgsOfN } from "./helpers";
 // Scramble text
 export let scramble = writable<string>(browser && localStorage.scramble
   ? localStorage.scramble
-  : sg.get(1)[0].scramble_string); 
+  : SG.get(1)[0].scramble_string); 
 scramble.subscribe((value: string) => {
   if (!browser) return;
   localStorage.scramble = value;

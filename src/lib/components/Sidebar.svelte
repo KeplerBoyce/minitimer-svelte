@@ -15,9 +15,6 @@
 </script>
 
 <div class="w-min h-full flex flex-col rounded-xl border border-black shadow-xl p-2 pl-8 -translate-x-6">
-  <h2 class="font-bold text-center text-xl mb-2">
-    Solves
-  </h2>
   <div class="flex flex-col gap-2 min-h-0">
     <SessionBlock />
 
