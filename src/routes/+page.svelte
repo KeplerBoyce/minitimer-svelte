@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AverageInfo from "$lib/components/AverageInfo.svelte";
   import Scramble from "$lib/components/Scramble.svelte";
   import Sidebar from "$lib/components/Sidebar.svelte";
   import Timer from "$lib/components/Timer.svelte";
@@ -15,6 +16,7 @@
       <Timer />
       <TimerOptions />
     </div>
+    <AverageInfo />
   </div>
   <div class="w-0 lg:w-72 shrink"></div>
 </div>
