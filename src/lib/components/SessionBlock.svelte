@@ -20,10 +20,10 @@
     </div>
     <div class="flex flex-col items-center">
       <h4 class="font-bold text-sm">
-        Global Mean
+        Mean
       </h4>
       <p>
-        {globalMean === undefined ? "N/A" : msToString(globalMean)}
+        {globalMean === undefined ? "-" : msToString(globalMean)}
       </p>
     </div>
     <div class="flex flex-col items-center">
@@ -31,7 +31,7 @@
         Std. Dev.
       </h4>
       <p>
-        {stdDev === undefined ? "N/A" : msToString(stdDev)}
+        {stdDev === undefined ? "-" : msToString(stdDev)}
       </p>
     </div>
   </div>

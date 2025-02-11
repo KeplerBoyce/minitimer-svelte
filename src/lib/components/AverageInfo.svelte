@@ -9,7 +9,7 @@
 
   const getBPA = () => {
     if ($session.solves.length < 4) {
-      return undefined;
+      return "-";
     }
     const times = $session.solves.slice(0, 4).map(s => getAdjustedTime(s));
     return msToString((times.reduce((a, b) => a + b) - Math.max(...times)) / 3);
@@ -17,7 +17,7 @@
 
   const getWPA = () => {
     if ($session.solves.length < 4) {
-      return undefined;
+      return "-";
     }
     const times = $session.solves.slice(0, 4).map(s => getAdjustedTime(s));
     return msToString((times.reduce((a, b) => a + b) - Math.min(...times)) / 3);
@@ -25,7 +25,7 @@
 
   const getMo3 = () => {
     if ($session.solves.length < 3) {
-      return "N/A";
+      return "-";
     }
     return msToString($session.solves
       .slice(0, 3)
@@ -53,7 +53,7 @@
   const getAoN = (n: number) => {
     const aoN = avgOfN($session.solves, 0, n);
     if (aoN === undefined) {
-      return "N/A";
+      return "-";
     }
     return msToString(aoN);
   }
@@ -77,7 +77,7 @@
 
   const getDiffString = (diff: number | undefined) => {
     if (diff === undefined) {
-      return "N/A";
+      return "-";
     } else if (diff > 0) {
       return `+${msToString(diff)}`;
     }

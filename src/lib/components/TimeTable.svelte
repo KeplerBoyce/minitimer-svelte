@@ -25,10 +25,10 @@
         Single
       </td>
       <td>
-        {$session.solves.length === 0 ? "N/A" : msToString(getAdjustedTime($session.solves[0]))}
+        {$session.solves.length === 0 ? "-" : msToString(getAdjustedTime($session.solves[0]))}
       </td>
       <td>
-        {sessionPbSingle ? `${sessionPbSingle.timeStr}` : "N/A"}
+        {sessionPbSingle ? `${sessionPbSingle.timeStr}` : "-"}
       </td>
     </tr>
   </tbody>
@@ -38,10 +38,10 @@
         Ao5
       </td>
       <td>
-        {$session.solves.length < 5 ? "N/A" : msToString(avgOfN($session.solves, 0, 5) ?? 0)}
+        {$session.solves.length < 5 ? "-" : msToString(avgOfN($session.solves, 0, 5) ?? 0)}
       </td>
       <td>
-        {sessionPbAo5 ? `${sessionPbAo5.timeStr}` : "N/A"}
+        {sessionPbAo5 ? `${sessionPbAo5.timeStr}` : "-"}
       </td>
     </tr>
   </tbody>
@@ -51,10 +51,10 @@
         Ao12
       </td>
       <td>
-        {$session.solves.length < 12 ? "N/A" : msToString(avgOfN($session.solves, 0, 12) ?? 0)}
+        {$session.solves.length < 12 ? "-" : msToString(avgOfN($session.solves, 0, 12) ?? 0)}
       </td>
       <td>
-        {sessionPbAo12 ? `${sessionPbAo12.timeStr}` : "N/A"}
+        {sessionPbAo12 ? `${sessionPbAo12.timeStr}` : "-"}
       </td>
     </tr>
   </tbody>
