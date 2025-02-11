@@ -15,7 +15,7 @@
         Current
       </th>
       <th class="font-bold text-sm">
-        Session Best
+        Best
       </th>
     </tr>
   </thead>

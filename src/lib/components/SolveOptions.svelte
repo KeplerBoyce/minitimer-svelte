@@ -177,10 +177,10 @@
     />
   {/if}
 </div>
-<p class="text-xl mb-1 font-bold">
+<p class="text-2xl mb-1 font-bold">
   {getTimeString()}
 </p>
-<p>
+<p class="mb-3">
   {solve.scramble}
 </p>
 {#if solve.timestamp}
@@ -211,7 +211,7 @@
   </div>
 </div>
 
-<h4 class="text-sm font-bold mt-2">
+<h4 class="text-sm font-bold mt-3">
   Average of 12
 </h4>
 <div class="flex gap-4">

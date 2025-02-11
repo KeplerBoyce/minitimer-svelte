@@ -9,6 +9,9 @@
 </script>
 
 <div class="flex flex-col border border-black rounded-lg px-2 py-1">
+  <h3 class="font-bold text-center mb-1">
+    Session Stats
+  </h3>
   <div class="flex gap-2 justify-evenly items-center">
     <div class="flex flex-col items-center">
       <h4 class="font-bold text-sm">
