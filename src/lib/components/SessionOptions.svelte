@@ -52,9 +52,8 @@
   }}
   class="border border-black rounded-lg px-2 w-full"
 >
-<DivideY />
 
-<h2 class="font-bold text-sm whitespace-nowrap mb-1">
+<h2 class="font-bold text-sm whitespace-nowrap mt-2 mb-1">
   Session Management
 </h2>
 <button

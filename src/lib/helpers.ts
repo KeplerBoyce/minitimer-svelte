@@ -61,18 +61,15 @@ export const dateToString = (date: Date) => {
   const hours = d.getHours();
   const minutes = d.getMinutes();
 
-  let str = `${month}/${day}/${year} at ${(hours - 1) % 12 + 1}:`;
-  if (minutes < 10) {
-    str += `0${minutes}`;
-  } else {
-    str += `${minutes}`;
-  }
+  const dayStr = day < 10 ? `0${day}` : `${day}`;
+  const monthStr = month < 10 ? `0${month}` : `${month}`;
+  const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`;
+
+  let str = `${year}-${monthStr}-${dayStr} at ${(hours - 1) % 12 + 1}:${minutesStr}`;
   if (hours < 12) {
-    str += "am";
-  } else {
-    str += "pm";
+    return `${str}am`;
   }
-  return str;
+  return `${str}pm`;
 }
 
 export const getAdjustedTime = (solve: Solve) => {

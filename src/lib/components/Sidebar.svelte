@@ -15,11 +15,11 @@
 </script>
 
 <div class="w-min h-full flex flex-col rounded-xl border border-black shadow-xl p-2 pl-4 -translate-x-2.5">
-  <div class="flex flex-col gap-2 min-h-0">
+  <div class="grow flex flex-col gap-2 min-h-0">
     <SessionBlock />
 
-    <div class="flex min-h-0">
-      <div class="grow border border-black rounded-lg flex flex-col min-h-0">
+    <div class="grow flex min-h-0">
+      <div class="grow border border-black rounded-lg flex flex-col min-h-0 overflow-hidden">
         <div class="flex font-bold text-right border-b border-black pr-2">
           <h3 class="min-w-10 mr-1">
             #
@@ -27,12 +27,12 @@
           <h3 class="min-w-20 mr-4">
             Ao5
           </h3>
-          <h3 class="min-w-20 mr-1">
+          <h3 class="min-w-20">
             Time
           </h3>
         </div>
 
-        <div class="overflow-y-auto pr-2">
+        <div class="overflow-y-auto">
           {#if $session.solves.length > 0}
             {#each $session.solves as _, i}
               <ListSolve index={i} />

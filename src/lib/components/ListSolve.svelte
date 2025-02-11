@@ -31,14 +31,14 @@
       $hoveredIndex = undefined;
     }}
   >
-    <div class={`w-full flex justify-end items-center ${$popoverIndex === index ? "bg-amber-200" : "hover:bg-amber-100"} font-mono text-right text-lg rounded-lg`}>
+    <div class={`w-full flex justify-end items-center ${$popoverIndex === index ? "bg-amber-200" : "hover:bg-amber-100"} font-mono text-right text-lg`}>
       <p class="min-w-10 text-sm mr-1">
         {$session.solves.length - index}
       </p>
       <p class={`min-w-20 mr-4 ${isPbAo5 ? "text-sky-500" : ""}`}>
         {ao5 ? msToString(ao5) : "-"}
       </p>
-      <p class={`min-w-20 mr-1 ${isPbSingle ? "text-sky-500" : ($session.solves[index].timeMod !== "None" ? "text-red-500" : "")}`}>
+      <p class={`min-w-20 mr-2 ${isPbSingle ? "text-sky-500" : ($session.solves[index].timeMod !== "None" ? "text-red-500" : "")}`}>
         {$session.solves[index].timeMod === "DNF" ? "DNF" : msToString(getAdjustedTime($session.solves[index]))}
       </p>
     </div>
