@@ -4,9 +4,11 @@
   let {
     buttonContent, // Content inside of button to open dropdown
     dropdownContent, // Content inside the dropdown menu
+    leftSide = false, // True if dropdown expands to left instead of right
   }: {
     buttonContent: Snippet<[boolean]>,
     dropdownContent: Snippet<[() => void]>,
+    leftSide?: boolean,
   } = $props();
 
   let open = $state(false);
@@ -16,7 +18,6 @@
 <div class="flex flex-col">
   <!-- svelte-ignore a11y_mouse_events_have_key_events -->
   <button
-    class="w-full"
     onclick={() => {
       open = !open;
     }}
@@ -30,7 +31,7 @@
     {@render buttonContent(open)}
   </button>
   <div class="relative">
-    <div class="min-w-full absolute top-1 left-0">
+    <div class={`min-w-full absolute top-1 ${leftSide ? "right-0" : "left-0"}`}>
       {#if open}
         {@render dropdownContent(() => {
           open = false;

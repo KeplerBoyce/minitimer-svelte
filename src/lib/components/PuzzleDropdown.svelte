@@ -4,7 +4,7 @@
   import Dropdown from "./general/Dropdown.svelte";
 </script>
 
-<Dropdown>
+<Dropdown leftSide>
   {#snippet buttonContent(open)}
     <div class={`border border-black rounded-lg min-w-16 px-2 ${open ? "bg-fuchsia-200" : "bg-slate-100 hover:bg-fuchsia-100"}`}>
       {$session.cube}

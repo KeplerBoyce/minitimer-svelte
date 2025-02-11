@@ -1,5 +1,6 @@
 <script lang="ts">
   import AverageInfo from "$lib/components/AverageInfo.svelte";
+    import FloatingSessionOptions from "$lib/components/FloatingSessionOptions.svelte";
   import Scramble from "$lib/components/Scramble.svelte";
   import Sidebar from "$lib/components/Sidebar.svelte";
   import Timer from "$lib/components/Timer.svelte";
@@ -18,5 +19,9 @@
     </div>
     <AverageInfo />
   </div>
-  <div class="w-0 lg:w-72 shrink"></div>
+  <div class="relative w-0 lg:w-72 h-full shrink">
+    <div class="absolute right-0 h-full flex items-center">
+      <FloatingSessionOptions />
+    </div>
+  </div>
 </div>
