@@ -12,8 +12,9 @@
     <Sidebar />
   </div>
   <div class="grow min-w-min w-full lg:min-w-[735px] h-full flex flex-col justify-center items-center">
-    <div class="h-1/5">
+    <div class="h-1/5 flex flex-col gap-4 items-center">
       <Scramble />
+      <FloatingSessionOptions />
     </div>
     <div class="grow flex flex-col justify-center items-center">
       <Timer />
@@ -23,9 +24,5 @@
       <AverageInfo />
     </div>
   </div>
-  <div class="relative w-0 lg:w-72 h-full shrink">
-    <div class="absolute right-0 h-full flex items-center">
-      <FloatingSessionOptions />
-    </div>
-  </div>
+  <div class="w-0 lg:w-72 h-full shrink"></div>
 </div>
