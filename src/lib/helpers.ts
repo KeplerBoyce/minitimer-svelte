@@ -78,28 +78,34 @@ export const getAdjustedTime = (solve: Solve) => {
   return solve.time;
 }
 
+export const filterOutDNF = (solves: Solve[]) => {
+  return solves.filter(s => s.timeMod !== "DNF");
+}
+
 export const getGlobalMean = (solves: Solve[]) => {
-  if (solves.length === 0) {
+  const filtered = filterOutDNF(solves);
+  if (filtered.length === 0) {
     return undefined;
   }
-  return solves
+  return filtered
     .map(s => getAdjustedTime(s))
     .reduce((a, b) => a + b)
-    / solves.length;
+    / filtered.length;
 }
 
 export const getStandardDeviation = (solves: Solve[]) => {
-  const mean = getGlobalMean(solves);
+  const filtered = filterOutDNF(solves);
+  const mean = getGlobalMean(filtered);
   if (mean === undefined) {
     return undefined;
   }
-  return Math.sqrt(solves
+  return Math.sqrt(filtered
     .map(s => {
       const deviation = getAdjustedTime(s) - mean;
       return deviation*deviation;
     })
     .reduce((a, b) => a + b)
-    / solves.length);
+    / filtered.length);
 }
 
 const removeOutliers = (times: number[]) => {
@@ -125,14 +131,16 @@ export const getNSolves = (solves: Solve[], index: number, n: number) => {
 }
 
 export const avgOfN = (solves: Solve[], index: number, n: number) => {
-  if (index + n > solves.length) {
+  const window = getNSolves(solves, index, n);
+  if (window === undefined) {
     return undefined;
   }
-  return Math.floor(removeOutliers(solves
-    .slice(index, index + n)
-    .map(a => getAdjustedTime(a)))
+  const windowTimes = window.map(a => getAdjustedTime(a));
+  const countedTimes = removeOutliers(windowTimes);
+
+  return Math.floor(countedTimes
     .reduce((a, b) => a + b)
-    / (n - 2 * getNumOutliers(n)));
+    / countedTimes.length);
 }
 
 export const getAvgInfo = (solves: Solve[], index: number) => {
