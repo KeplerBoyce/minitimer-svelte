@@ -1,26 +1,26 @@
 <script lang="ts">
   import { session } from "$lib/state";
-  import { avgOfN, getAdjustedTime, msToString } from "$lib/helpers";
+  import { avgOfN, getAdjustedTime, msToString, getBPA, getWPA } from "$lib/helpers";
 
   const COL_CLASS = "flex flex-col items-center min-w-12";
   const ROW_CLASS = "flex gap-6 justify-center items-center";
   const HEADING_CLASS = "font-bold text-sm";
   const TIME_CLASS = "text-xl";
 
-  const getBPA = () => {
-    if ($session.solves.length < 4) {
+  const getBPAString = () => {
+    const bpa = getBPA($session.solves);
+    if (bpa === undefined) {
       return "-";
     }
-    const times = $session.solves.slice(0, 4).map(s => getAdjustedTime(s));
-    return msToString((times.reduce((a, b) => a + b) - Math.max(...times)) / 3);
+    return msToString(bpa);
   }
 
-  const getWPA = () => {
-    if ($session.solves.length < 4) {
+  const getWPAString = () => {
+    const wpa = getWPA($session.solves);
+    if (wpa === undefined) {
       return "-";
     }
-    const times = $session.solves.slice(0, 4).map(s => getAdjustedTime(s));
-    return msToString((times.reduce((a, b) => a + b) - Math.min(...times)) / 3);
+    return msToString(wpa);
   }
 
   const getMo3 = () => {
@@ -92,7 +92,7 @@
         BPA
       </p>
       <p class={TIME_CLASS}>
-        {getBPA()}
+        {getBPAString()}
       </p>
     </div>
 
@@ -101,7 +101,7 @@
         WPA
       </p>
       <p class={TIME_CLASS}>
-        {getWPA()}
+        {getWPAString()}
       </p>
     </div>
   </div>

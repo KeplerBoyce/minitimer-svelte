@@ -251,30 +251,34 @@
       >
         {singleCopied ? "Copied!" : "Single"}
       </button>
-      <button
-        class="whitespace-nowrap font-bold text-sm min-w-20 px-2 py-1 bg-slate-100 hover:bg-amber-100 border border-black rounded-lg"
-        onclick={() => {
-          copyAo5Summary();
-          ao5Copied = true;
-          setTimeout(() => {
-            ao5Copied = false;
-          }, 1000);
-        }}
-      >
-        {ao5Copied ? "Copied!" : "Ao5"}
-      </button>
-      <button
-        class="whitespace-nowrap font-bold text-sm min-w-20 px-2 py-1 bg-slate-100 hover:bg-amber-100 border border-black rounded-lg"
-        onclick={() => {
-          copyAo12Summary();
-          ao12Copied = true;
-          setTimeout(() => {
-            ao12Copied = false;
-          }, 1000);
-        }}
-      >
-        {ao12Copied ? "Copied!" : "Ao12"}
-      </button>
+      {#if ao5Times.average}
+        <button
+          class="whitespace-nowrap font-bold text-sm min-w-20 px-2 py-1 bg-slate-100 hover:bg-amber-100 border border-black rounded-lg"
+          onclick={() => {
+            copyAo5Summary();
+            ao5Copied = true;
+            setTimeout(() => {
+              ao5Copied = false;
+            }, 1000);
+          }}
+        >
+          {ao5Copied ? "Copied!" : "Ao5"}
+        </button>
+      {/if}
+      {#if ao12Times.average}
+        <button
+          class="whitespace-nowrap font-bold text-sm min-w-20 px-2 py-1 bg-slate-100 hover:bg-amber-100 border border-black rounded-lg"
+          onclick={() => {
+            copyAo12Summary();
+            ao12Copied = true;
+            setTimeout(() => {
+              ao12Copied = false;
+            }, 1000);
+          }}
+        >
+          {ao12Copied ? "Copied!" : "Ao12"}
+        </button>
+      {/if}
     </div>
   </div>
 

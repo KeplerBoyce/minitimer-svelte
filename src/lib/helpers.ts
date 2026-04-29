@@ -111,7 +111,7 @@ export const getStandardDeviation = (solves: Solve[]) => {
 const removeOutliers = (times: number[]) => {
   const n = times.length;
   const numOutliers = getNumOutliers(n);
-  return times.sort().slice(numOutliers, n - 2 * numOutliers + 1);
+  return times.toSorted((a, b) => a - b).slice(numOutliers, n - 2 * numOutliers + 1);
 }
 
 const getNumOutliers = (n: number) => {
@@ -182,4 +182,22 @@ export const getPbAvgOfNSolves = (solves: Solve[], n: number) => {
     timeStr: msToString(bestSoFar),
     index: startIndex,
   };
+}
+
+export const getBPA = (solves: Solve[]) => {
+  if (solves.length < 4) {
+    return undefined;
+  }
+  const times = solves.slice(0, 4).map(s => getAdjustedTime(s));
+  const slowest = Math.max(...times);
+  return (times.reduce((a, b) => a + b) - slowest) / 3;
+}
+
+export const getWPA = (solves: Solve[]) => {
+  if (solves.length < 4) {
+    return undefined;
+  }
+  const times = solves.slice(0, 4).map(s => getAdjustedTime(s));
+  const fastest = Math.min(...times);
+  return (times.reduce((a, b) => a + b) - fastest) / 3;
 }
